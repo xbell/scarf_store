@@ -1,0 +1,14 @@
+.center-block {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+.carousel-inner p {
+  font-size: 300%;
+}
+
+.product_details li {
+  text-decoration: none;
+}

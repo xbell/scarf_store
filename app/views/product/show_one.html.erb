@@ -1,0 +1,38 @@
+<h1><%= @product.name %></h1>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="product_details">
+        <li><%= image_tag @product.image_url %></li>
+        <li><%= @product.description %></li>
+        <li><%= @product_option.name %></li>
+        <li><%= number_to_currency((@product_option.price_in_cents) * 0.01) %></li>
+      </div>
+    </div>
+  <!-- <li><%= link_to "Add to Cart", scarf_path %></li> -->
+  <input type="submit" value="Add to Cart" class="btn btn-default">
+</div>
+
+
+
+
+
+<!--
+<h1><%= @product.name %></h1>
+
+<div class="single_product">
+  <%= image_tag @product.image_url %>
+  <%= @product.description %>
+</div>
+
+<div class="single_product_option">
+  <%= @product_option.name %>
+  <%= number_to_currency((@product_option.price_in_cents) * 0.01) %>
+</div>
+
+<p>
+
+    <li><%= link_to "Add to Cart", scarf_path %></li>
+
+</p> -->

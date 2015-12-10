@@ -1,0 +1,30 @@
+<h1>Scarves!</h1>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <% @products.in_groups_of(4, false).each do |group| %>
+        <div class="row">
+          <% group.each do |product| %>
+            <div class="product col-md-3">
+              <%= image_tag product.image_url %>
+              <h3><%= link_to product.name, scarf_path(product.id) %></h3>
+              <%= product.description %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+
+
+
+
+  <!-- <% @products.each do |product| %>
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+      <%= image_tag product.image_url %>
+      <li><%= link_to product.name, scarf_path(product.id) %></li>
+      <%=product.description %>
+    </div>
+  <% end %>
+  </div>
+</div> -->

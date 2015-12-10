@@ -1,0 +1,77 @@
+<% if @product %>
+  <ul>
+    <% @product.errors.each do |column, error| %>
+      <li><%= column %> <%= error %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<% if @product_option %>
+  <ul>
+    <% @product_option.errors.each do |column, error| %>
+      <li><%= column %> <%= error %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<div class = "form">
+
+  <form action="/product/admin/<%= @product.id %>" method="POST">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+    <div>
+      <h4>
+        <label for="name-input">EDIT Add a Scarf</label>
+      </h4>
+      <input type="text" id = "name-input" name="name" value="<%= @product.name %>" />
+    </div>
+    <div>
+      <h4>
+        <label for="description-input">EDIT Scarf Description</label>
+      </h4>
+      <input type="text" id = "description-input" name="description" value="<%= @product.description %>" />
+    </div>
+    <div>
+      <h4>
+        <label for="image-input">EDIT Scarf Image</label>
+      </h4>
+      <input type="text" id = "image-input" name="image_url" value="<%= @product.image_url %>" />
+    </div>
+    <div>
+      <h4>
+        <label for="type-input">EDIT Scarf Type</label>
+      </h4>
+      <input type="text" id = "type-input" name="type" value="<%= @product_option.name %>" />
+    </div>
+    <div>
+      <h4>
+        <label for="price-input">EDIT Scarf Price in Cents</label>
+      </h4>
+      <input type="text" id = "price-input" name="price_in_cents" value="<%= @product_option.price_in_cents %>" />
+    </div>
+    <div class="update">
+      <input type="submit" value="Update" />
+    </div>
+  </form>
+</div>
+
+<h1><%= @product.name %></h1>
+<div class="single_product">
+  <%= image_tag @product.image_url %>
+  <%= @product.description %>
+</div>
+
+<div class="single_product_option">
+  <%= @product_option.name %>
+  <%= number_to_currency((@product_option.price_in_cents) * 0.01) %>
+</div>
+
+
+    <div class="buttons">
+      <li>
+        <form action="/product/admin/<%= @product.id %>" method="POST">
+          <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+          <input type="hidden" name="_method" value="DELETE" />
+          <input type="submit" value="Delete Product" data-confirm="Delete the product?" />
+        </form>
+      </li>
+    </div>

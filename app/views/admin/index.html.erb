@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<h1>Scarves!</h1>
+
+<% if @add_product %>
+  <ul class= "popup">
+    <h3>ERROR!</h3>
+    <% @add_product.errors.each do |column, error| %>
+      <li><%= column %> <%= error %></li>
+    <% end %>
+    <p class = "errors">Close Error Message</p>
+  </ul>
+<% end %>
+
+<% if @add_product_option %>
+  <ul class= "popup">
+    <h3>ERROR!</h3>
+    <% @add_product_option.errors.each do |column, error| %>
+      <li><%= column %> <%= error %></li>
+    <% end %>
+    <p class = "errors">Close Error Message</p>
+  </ul>
+<% end %>
+
+<div class = "form">
+
+  <form action="/products/admin" method="POST">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+    <div>
+      <h4>
+        <label for="name-input">Add a Scarf</label>
+      </h4>
+      <input type="text" id = "name-input" name="name" />
+    </div>
+    <div>
+      <h4>
+        <label for="description-input">Scarf Description</label>
+      </h4>
+      <input type="text" id = "description-input" name="description" />
+    </div>
+    <div>
+      <h4>
+        <label for="image-input">Scarf Image</label>
+      </h4>
+      <input type="text" id = "image-input" name="image_url" />
+    </div>
+    <div>
+      <h4>
+        <label for="type-input">Scarf Type</label>
+      </h4>
+      <input type="text" id = "type-input" name="type" />
+    </div>
+    <div>
+      <h4>
+        <label for="price-input">Scarf Price in Cents</label>
+      </h4>
+      <input type="text" id = "price-input" name="price_in_cents" />
+    </div>
+    <div class="submit">
+      <input type="submit" />
+    </div>
+  </form>
+</div>
+
+<div class="container">
+  <div class="row">
+  <% @products.each do |product| %>
+    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+      <%= image_tag product.image_url %>
+      <li><%= link_to product.name, product_edit_path(product.id) %></li>
+      <%= product.description %>
+    </div>
+  <% end %>
+  </div>
+</div>

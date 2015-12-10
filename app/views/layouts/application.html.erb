@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Wrap It Up!</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  <%= csrf_meta_tags %>
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+</head>
+<body>
+
+  <% if flash.key?(:notice) %>
+    <div class="alert alert-info">
+      <%= flash[:notice] %>
+    </div>
+  <% end %>
+
+  <% if flash.key?(:warning) %>
+    <div class="alert alert-danger">
+      <%= flash[:warning] %>
+    </div>
+  <% end %>
+
+  <% if flash.key?(:success) %>
+    <div class="alert alert-success">
+      <%= flash[:success] %>
+    </div>
+  <% end %>
+
+  <nav class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        <%= link_to "Wrap It Up!", "/", class: "navbar-brand" %>
+        <button class="navbar-toggle collapsed" data-toggle="collapse" data-target=".menu_bar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+
+      <div class="menu_bar collapse navbar-collapse">
+        <div class="navbar-right">
+          <ul class="nav navbar-nav">
+            <li><%= link_to "Scarves", scarves_path %></li>
+            <li><%= link_to "Cart", cart_path %></li>
+            <li><%= link_to "Sign Up", signup_path %></li>
+
+            <% if session[:user_id] == 10 %>
+              <small class='text-success'>Hello, <%= @current_user.email %></small>
+              <li><%= link_to "Products", "/products" %></li>
+              <li><%= link_to "My Account", account_path %></li>
+              <li><%= link_to "Sign Out", log_out_path %></li>
+            <% elsif @current_user %>
+              <small class='text-success'>Hello, <%= @current_user.email %></small>
+              <li><%= link_to "My Account", account_path %></li>
+              <li><%= link_to "Sign Out", log_out_path %></li>
+            <% end %>
+          </ul>
+        </div>
+
+        <% if !@current_user %>
+          <div class="navbar-right">
+            <%= form_tag log_in_path, class: "navbar-form" do %>
+              <div class="form-group">
+                <input type="email" name="email" placeholder="Email" class="form-control">
+              </div>
+              <div class="form-group">
+                <input type="password" name="password" placeholder="Password" class="form-control">
+              </div>
+              <input type="submit" value="Log In" class="btn btn-default">
+            <% end %>
+          </div>
+        <% end %>
+
+        <!-- <ul class="nav navbar-nav navbar-right"> -->
+          <!-- <li><a href="/login">Log In</a></li> -->
+          <!-- <% if session[:user_id] == 10 %>
+            <small class='text-success'>Hello, <%= @current_user.email %></small>
+            <%= link_to "Products", "/products" %>
+            <%= link_to "Log Out", "/log-out", class: "btn btn-danger btn-sm" %>
+          <% elsif @current_user %>
+            <small class='text-success'>Hello, <%= @current_user.email %></small>
+            <%= link_to "My Account", "/account" %>
+            <%= link_to "Log Out", "/log-out", class: "btn btn-danger btn-sm" %>
+          <% else %>
+            <%= form_tag "/log-in", class: "pull-right" do %>
+              Email
+              <%= text_field_tag :email %>
+              Password
+              <%= password_field_tag :password %>
+
+              <%= submit_tag "Log In" %>
+            <% end %>
+          <% end %>
+        </ul> -->
+      </div>
+    </div>
+  </nav>
+
+<%= yield %>
+
+</body>
+</html>
