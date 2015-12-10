@@ -21,16 +21,18 @@ class AdminController < ApplicationController
       @add_product_option.price_in_cents = params[:price_in_cents]
       @add_product_option.product_id = @add_product.id
       if @add_product_option.save
-        redirect_to "/products"
+        redirect_to "/products", notice: "#{@add_product.name} has been created!"
       else
         @add_product.destroy
-        @add_products = Product.all
-        @add_product_options = ProductOptions.all
+        @products = Product.all
+        @product_options = ProductOption.all
+        flash.now[:notice] = "Error creating product, please fill in all fields."
         render :index
       end
     else
-      @add_products = Product.all
-      # @add_product_options = ProductOptions.all
+      @products = Product.all
+      @product_options = ProductOption.all
+      flash.now[:notice] = "Error creating product, please fill in all fields."
       render :index
     end
   end
@@ -64,26 +66,32 @@ class AdminController < ApplicationController
       @add_product_option.price_in_cents = params[:price_in_cents]
       # @add_product_option.product_id = @product.id
       if @add_product_option.save
-        redirect_to "/products"
+        redirect_to "/products", notice: "#{@add_product.name} has been updated!"
       else
-        @add_product.destroy
-        @add_products = Product.all
-        @add_product_options = ProductOptions.all
-        render :product_edit
+        @product = Product.find(params[:id])
+        @product_option = ProductOption.find_by(product_id: params[:id])
+        @products = Product.all
+        @product_options = ProductOption.all
+        flash.now[:notice] = "Error updating product."
+        render :show_one
       end
     else
+      @product = Product.find(params[:id])
+      @product_option = ProductOption.find_by(product_id: params[:id])
       @products = Product.all
-      @product_options = ProductOptions.all
-      render :index
+      @product_options = ProductOption.all
+      flash.now[:notice] = "Error updating product."
+      render :show_one
     end
   end
 
   def delete
     @product_option = ProductOption.find_by(product_id: params[:id])
     @product = Product.find(params[:id])
+    product_name = @product.name
     @product_option.destroy
     @product.destroy
-    redirect_to "/products"
+    redirect_to "/products", notice: "#{product_name} has been deleted!"
   end
 
 
