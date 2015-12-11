@@ -43,6 +43,10 @@
       <div class="menu_bar collapse navbar-collapse">
         <div class="navbar-right">
           <ul class="nav navbar-nav">
+            <% cart_total = 0 %>
+            <% Item.all.each do |item| %>
+              <% cart_total += item.quantity %>
+            <% end %>
             <% if session[:user_id] == 10 %>
               <small class='text-success'>Hello, <%= @current_user.email %></small>
               <li><%= link_to "Scarves", scarves_path %></li>
@@ -57,12 +61,12 @@
                 </div>
               </small>
               <li><%= link_to "Scarves", scarves_path %></li>
-              <li><%= link_to "Cart (0)", cart_path %></li>
+              <li><%= link_to "Cart (#{cart_total})", cart_path %></li>
               <li><%= link_to "My Account", account_path %></li>
               <li><%= link_to "Sign Out", log_out_path %></li>
             <% else %>
               <li><%= link_to "Scarves", scarves_path %></li>
-              <li><%= link_to "Cart (0)", cart_path %></li>
+              <li><%= link_to "Cart (#{cart_total})", cart_path %></li>
               <li><%= link_to "Sign Up", signup_path %></li>
             <% end %>
           </ul>

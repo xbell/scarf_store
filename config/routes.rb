@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   post "/log-in", to: "sessions#log_in", as: :log_in
 
   get "/cart", to: "item#cart", as: :cart
-  post "/cart", to: "item#add_to_cart", as: :add_to_cart
+  post "/scarves/:id", to: "item#add_to_cart", as: :add_to_cart
 
   get "/products", to: "admin#index", as: :product_index
   post "/products/admin", to: "admin#add_product"

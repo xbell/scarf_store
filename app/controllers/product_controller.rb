@@ -25,9 +25,9 @@ class ProductController < ApplicationController
     @product_option = ProductOption.find_by(product_id: params[:id])
   end
 
-  def cart
-   @items = Item.all
-  end
+  # def cart
+  #  @items = Item.all
+  # end
 
   def signup
 
