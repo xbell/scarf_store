@@ -63,3 +63,39 @@ h1 {
   margin: 3%;
   font-size: 400%;
 }
+
+.table tbody tr td {
+  vertical-align: middle;
+}
+
+/*.table tfoot td {
+  display: block;
+}
+
+.table tfoot td .btn {
+  display: block;
+}*/
+
+.table tfoot tr td {
+  vertical-align: middle;
+}
+
+.table cart tbody td .form-control {
+  width: 20%;
+  display: inline;
+}
+
+
+
+/*.actions .btn {
+	width:36%;
+	margin:1.5em 0;
+}
+
+.actions .btn-info {
+  float: left;
+}
+
+.actions .btn-danger {
+	float:right;
+}*/

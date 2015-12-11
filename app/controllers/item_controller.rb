@@ -34,4 +34,17 @@ class ItemController < ApplicationController
     end
   end
 
+  def update_cart
+
+  end
+
+  def delete_item
+    @product_option = ProductOption.find(params[:id])
+    @product = Product.find(@product_option.product_id)
+    product_name = @product.name
+    @item = Item.find_by(product_option_id: @product_option.id)
+    @item.destroy
+    redirect_to "/cart", notice: "#{product_name} have been deleted."
+  end
+
 end

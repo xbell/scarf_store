@@ -1,13 +1,13 @@
 <div class="container">
 
-  <h1>Cart!</h1>
+  <h1>Cart</h1>
 
   <% total_price = 0 %>
 
   <% @items.each do |item| %>
 
 	<table id="cart" class="table table-hover table-condensed">
-			<thead>
+		<thead>
 			<tr>
 				<th style="width:50%"></th>
 				<th style="width:10%">Price</th>
@@ -20,22 +20,34 @@
 			<tr>
 				<td data-th="Product">
 					<div class="row">
-						<div class="col-sm-2 hidden-xs"><img src=<%="#{Product.find(ProductOption.find(item.product_option_id).product_id).image_url}"%> alt="..." class="img-responsive"/></div>
-						<div class="col-sm-10">
-							<h4 class="nomargin"><%= Product.find(ProductOption.find(item.product_option_id).product_id).name %></h4>
-							<p><%= Product.find(ProductOption.find(item.product_option_id).product_id).description %></p>
-						</div>
+						<div class="col-sm-2 hidden-xs">
+              <img src=<%="#{Product.find(ProductOption.find(item.product_option_id).product_id).image_url}"%> alt="..." class="img-responsive"/>
+            </div>
+					  <div class="col-sm-10">
+						  <h4 class="nomargin"><%= Product.find(ProductOption.find(item.product_option_id).product_id).name %></h4>
+						  <p><%= Product.find(ProductOption.find(item.product_option_id).product_id).description %></p>
+					  </div>
 					</div>
 				</td>
 				<td data-th="Price"><%= number_to_currency(item.price.to_i * 0.01) %></td>
 				<td data-th="Quantity">
-					<input type="number" class="form-control text-center" value=<%="#{item.quantity}"%>>
+					<input type="number" class="form-control text-center" value=<%="#{item.quantity}"%> />
 				</td>
 				<td data-th="Subtotal" class="text-center"><%= number_to_currency(item.price.to_i * 0.01 * item.quantity) %></td>
-				<td class="actions" data-th="">
-					<button class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>
-					<button class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
-				</td>
+        <div class="update-buttons">
+          <td class="actions" data-th="">
+            <form action="/cart/<%= item.product_option_id %>" method="POST">
+              <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+              <input type="hidden" name="_method" value="UPDATE" />
+    					<button type="submit" class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>
+            </form>
+            <form action="/cart/<%= item.product_option_id %>" method="POST">
+              <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+              <input type="hidden" name="_method" value="DELETE" />
+    					<button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
+            </form>
+          </td>
+        </div>
 			</tr>
 		</tbody>
 	</table>
@@ -45,13 +57,22 @@
   <% if @items.count == 0 %>
     <h2><%= "Your cart is empty. Please add items to your cart." %></h2>
   <% else %>
-    <tfoot>
-      <tr>
-        <td><a href="/scarves" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
-        <td colspan="2" class="hidden-xs"></td>
-        <td class="hidden-xs text-center"><strong>Total <%= number_to_currency(total_price) %></strong></td>
-        <td><a href="#" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>
-      </tr>
-    </tfoot>
+
+  <td data-th="Product">
+		<div class="row">
+			<div class="col-sm-2 hidden-xs">
+			  <div class="col-sm-10">
+          <tfoot>
+            <tr>
+              <td><a href="/scarves" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
+              <td colspan="2" class="hidden-xs"></td>
+              <td class="hidden-xs text-center"><strong>Total <%= number_to_currency(total_price) %></strong></td>
+              <td><a href="#" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>
+            </tr>
+          </tfoot>
+        </div>
+      </div>
+    </div>
   <% end %>
+  </td>
 </div>

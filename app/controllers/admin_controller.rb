@@ -37,19 +37,6 @@ class AdminController < ApplicationController
     end
   end
 
-  # def add_product_option
-  #   @add_product_option = ProductOption.new
-  #   @add_product_option.name = params[:name]
-  #   @add_product_option.price_in_cents = params[:price_in_cents]
-  #   @add_product_option.product_id = Product.where(id: params[:product_id])
-  #   if @add_product_option.save
-  #     redirect_to "/products"
-  #   else
-  #     @add_product_options = ProductOption.all
-  #     render :index
-  #   end
-  # end
-
   def edit
     @product = Product.find(params[:id])
     @product_option = ProductOption.find(params[:id])
@@ -64,7 +51,6 @@ class AdminController < ApplicationController
       @product_option = ProductOption.find_by(product_id: params[:id])
       @product_option.name = params[:type]
       @product_option.price_in_cents = params[:price_in_cents]
-      # @add_product_option.product_id = @product.id
       if @product_option.save
         redirect_to "/products", notice: "#{@product.name} has been updated!"
       else

@@ -13,6 +13,8 @@ Rails.application.routes.draw do
 
   get "/cart", to: "item#cart", as: :cart
   post "/scarves/:id", to: "item#add_to_cart", as: :add_to_cart
+  post "/cart/:id", to: "item#update_cart"
+  delete "/cart/:id", to: "item#delete_item"
 
   get "/products", to: "admin#index", as: :product_index
   post "/products/admin", to: "admin#add_product"
