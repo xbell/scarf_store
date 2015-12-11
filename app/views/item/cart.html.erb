@@ -41,15 +41,17 @@
 	</table>
   <% total_price += (item.price.to_i * 0.01 * item.quantity) %>
   <% end %>
-  <tfoot>
-    <!-- <tr class="visible-xs">
-      <td class="text-center"><strong>Total <%= number_to_currency(total_price) %></strong></td>
-    </tr> -->
-    <tr>
-      <td><a href="/scarves" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
-      <td colspan="2" class="hidden-xs"></td>
-      <td class="hidden-xs text-center"><strong>Total <%= number_to_currency(total_price) %></strong></td>
-      <td><a href="#" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>
-    </tr>
-  </tfoot>
+
+  <% if @items.count == 0 %>
+    <h2><%= "Your cart is empty. Please add items to your cart." %></h2>
+  <% else %>
+    <tfoot>
+      <tr>
+        <td><a href="/scarves" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
+        <td colspan="2" class="hidden-xs"></td>
+        <td class="hidden-xs text-center"><strong>Total <%= number_to_currency(total_price) %></strong></td>
+        <td><a href="#" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>
+      </tr>
+    </tfoot>
+  <% end %>
 </div>
