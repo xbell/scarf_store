@@ -1,3 +1,34 @@
+body {
+  background-color: #D1DEDE;
+}
+
+.navbar {
+  background-color: #C58882;
+  border-color: #C58882;
+  color: #706677;
+}
+
+.navbar-brand {
+  color: #706677;
+  font-weight: bold;
+  font-size: 180%;
+}
+
+.navbar-default .navbar-nav li a {
+    color: #706677;
+    font-weight: bolder;
+}
+
+/*.navbar-default .navbar-brand {
+    color: #706677;
+}*/
+
+.text-success {
+  color: beige;
+  font-family: "Iowan Old Style";
+  font-size: 100%;
+}
+
 .center-block {
   display: block;
   margin-left: auto;
@@ -11,4 +42,24 @@
 
 .product_details li {
   text-decoration: none;
+}
+
+.product img {
+  width: 100%;
+}
+
+.product a {
+  font-size: 100%;
+  color: #706677;
+}
+
+h3 {
+  text-align: center;
+}
+
+h1 {
+  text-align: center;
+  color: #706677;
+  margin: 3%;
+  font-size: 400%;
 }

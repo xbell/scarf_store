@@ -2,26 +2,6 @@
 
 <h1>Scarves!</h1>
 
-<!-- <% if @add_product %>
-  <ul class= "popup">
-    <h3>ERROR!</h3>
-    <% @add_product.errors.each do |column, error| %>
-      <li><%= column %> <%= error %></li>
-    <% end %>
-    <p class = "errors">Close Error Message</p>
-  </ul>
-<% end %>
-
-<% if @add_product_option %>
-  <ul class= "popup">
-    <h3>ERROR!</h3>
-    <% @add_product_option.errors.each do |column, error| %>
-      <li><%= column %> <%= error %></li>
-    <% end %>
-    <p class = "errors">Close Error Message</p>
-  </ul>
-<% end %> -->
-
 <div class = "form">
 
   <form action="/products/admin" method="POST">
@@ -57,19 +37,27 @@
       <input type="text" id = "price-input" name="price_in_cents" />
     </div>
     <div class="submit">
-      <input type="submit" />
+      <input type="submit" class="btn btn-default" />
     </div>
   </form>
 </div>
 
 <div class="container">
   <div class="row">
-  <% @products.each do |product| %>
-    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-      <%= image_tag product.image_url %>
-      <li><%= link_to product.name, product_edit_path(product.id) %></li>
-      <%= product.description %>
+    <div class="col-md-12">
+      <% @products.in_groups_of(4, false).each do |group| %>
+        <div class="row">
+          <% group.each do |product| %>
+            <div class="product col-md-3">
+              <%= image_tag product.image_url %>
+              <h3><%= link_to product.name, product_edit_path(product.id) %></h3>
+              <li><%= product.description %></li>
+              <li><%= ProductOption.find_by(product_id: product.id).name %></li>
+              <li><%= number_to_currency((ProductOption.find_by(product_id: product.id).price_in_cents) * 0.01) %></li>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
     </div>
-  <% end %>
   </div>
 </div>

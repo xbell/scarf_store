@@ -43,19 +43,27 @@
       <div class="menu_bar collapse navbar-collapse">
         <div class="navbar-right">
           <ul class="nav navbar-nav">
-            <li><%= link_to "Scarves", scarves_path %></li>
-            <li><%= link_to "Cart", cart_path %></li>
-            <li><%= link_to "Sign Up", signup_path %></li>
-
             <% if session[:user_id] == 10 %>
               <small class='text-success'>Hello, <%= @current_user.email %></small>
+              <li><%= link_to "Scarves", scarves_path %></li>
               <li><%= link_to "Products", "/products" %></li>
-              <li><%= link_to "My Account", account_path %></li>
+              <li><%= link_to "Orders", "#" %></li>
+              <li><%= link_to "Account", account_path %></li>
               <li><%= link_to "Sign Out", log_out_path %></li>
             <% elsif @current_user %>
-              <small class='text-success'>Hello, <%= @current_user.email %></small>
+              <small class='text-success'>
+                <div class ='success-email'>
+                  Hello, <%= @current_user.email %>
+                </div>
+              </small>
+              <li><%= link_to "Scarves", scarves_path %></li>
+              <li><%= link_to "Cart (0)", cart_path %></li>
               <li><%= link_to "My Account", account_path %></li>
               <li><%= link_to "Sign Out", log_out_path %></li>
+            <% else %>
+              <li><%= link_to "Scarves", scarves_path %></li>
+              <li><%= link_to "Cart (0)", cart_path %></li>
+              <li><%= link_to "Sign Up", signup_path %></li>
             <% end %>
           </ul>
         </div>
@@ -73,28 +81,6 @@
             <% end %>
           </div>
         <% end %>
-
-        <!-- <ul class="nav navbar-nav navbar-right"> -->
-          <!-- <li><a href="/login">Log In</a></li> -->
-          <!-- <% if session[:user_id] == 10 %>
-            <small class='text-success'>Hello, <%= @current_user.email %></small>
-            <%= link_to "Products", "/products" %>
-            <%= link_to "Log Out", "/log-out", class: "btn btn-danger btn-sm" %>
-          <% elsif @current_user %>
-            <small class='text-success'>Hello, <%= @current_user.email %></small>
-            <%= link_to "My Account", "/account" %>
-            <%= link_to "Log Out", "/log-out", class: "btn btn-danger btn-sm" %>
-          <% else %>
-            <%= form_tag "/log-in", class: "pull-right" do %>
-              Email
-              <%= text_field_tag :email %>
-              Password
-              <%= password_field_tag :password %>
-
-              <%= submit_tag "Log In" %>
-            <% end %>
-          <% end %>
-        </ul> -->
       </div>
     </div>
   </nav>

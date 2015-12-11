@@ -11,19 +11,19 @@ class AdminController < ApplicationController
   end
 
   def add_product
-    @add_product = Product.new
-    @add_product.name = params[:name]
-    @add_product.description = params[:description]
-    @add_product.image_url = params[:image_url]
-    if @add_product.save
-      @add_product_option = ProductOption.new
-      @add_product_option.name = params[:type]
-      @add_product_option.price_in_cents = params[:price_in_cents]
-      @add_product_option.product_id = @add_product.id
-      if @add_product_option.save
-        redirect_to "/products", notice: "#{@add_product.name} has been created!"
+    @product = Product.new
+    @product.name = params[:name]
+    @product.description = params[:description]
+    @product.image_url = params[:image_url]
+    if @product.save
+      @product_option = ProductOption.new
+      @product_option.name = params[:type]
+      @product_option.price_in_cents = params[:price_in_cents]
+      @product_option.product_id = @product.id
+      if @product_option.save
+        redirect_to "/products", notice: "#{@product.name} has been created!"
       else
-        @add_product.destroy
+        @product.destroy
         @products = Product.all
         @product_options = ProductOption.all
         flash.now[:notice] = "Error creating product, please fill in all fields."
@@ -56,17 +56,17 @@ class AdminController < ApplicationController
   end
 
   def update
-    @add_product = Product.find(params[:id])
-    @add_product.name = params[:name]
-    @add_product.description = params[:description]
-    @add_product.image_url = params[:image_url]
-    if @add_product.save
-      @add_product_option = ProductOption.find_by(product_id: params[:id])
-      @add_product_option.name = params[:type]
-      @add_product_option.price_in_cents = params[:price_in_cents]
+    @product = Product.find(params[:id])
+    @product.name = params[:name]
+    @product.description = params[:description]
+    @product.image_url = params[:image_url]
+    if @product.save
+      @product_option = ProductOption.find_by(product_id: params[:id])
+      @product_option.name = params[:type]
+      @product_option.price_in_cents = params[:price_in_cents]
       # @add_product_option.product_id = @product.id
-      if @add_product_option.save
-        redirect_to "/products", notice: "#{@add_product.name} has been updated!"
+      if @product_option.save
+        redirect_to "/products", notice: "#{@product.name} has been updated!"
       else
         @product = Product.find(params[:id])
         @product_option = ProductOption.find_by(product_id: params[:id])

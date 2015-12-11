@@ -4,13 +4,15 @@ Rails.application.routes.draw do
   get "/account", to: "product#account", as: :account
   get "/scarves/:id", to: "product#show_one", as: :scarf
   get "/scarves", to: "product#show_all", as: :scarves
-  get "/cart", to: "item#cart", as: :cart
 
   get "/signup", to: "product#signup", as: :signup
   post "/signup", to: "user#create", as: :create
 
   get "/log-out", to: "sessions#log_out", as: :log_out
   post "/log-in", to: "sessions#log_in", as: :log_in
+
+  get "/cart", to: "item#cart", as: :cart
+  post "/cart", to: "item#add_to_cart", as: :add_to_cart
 
   get "/products", to: "admin#index", as: :product_index
   post "/products/admin", to: "admin#add_product"
