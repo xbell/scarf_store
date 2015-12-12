@@ -30,21 +30,26 @@
 					</div>
 				</td>
 				<td data-th="Price"><%= number_to_currency(item.price.to_i * 0.01) %></td>
-				<td data-th="Quantity">
-					<input type="number" class="form-control text-center" value=<%="#{item.quantity}"%> />
-				</td>
+        <!-- <form action="/cart/<%= item.product_option_id %>" method="POST">
+          <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+          <td data-th="Quantity">
+  					<input type="number" name="quantity" class="form-control text-center" value=<%="#{item.quantity}"%> />
+  				</td>
+        </form> -->
+
 				<td data-th="Subtotal" class="text-center"><%= number_to_currency(item.price.to_i * 0.01 * item.quantity) %></td>
         <div class="update-buttons">
           <td class="actions" data-th="">
             <form action="/cart/<%= item.product_option_id %>" method="POST">
               <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
-              <input type="hidden" name="_method" value="UPDATE" />
+              <input type="number" name="quantity" class="form-control text-center" value=<%="#{item.quantity}"%> />
+              <!-- <input type="hidden" name="_method" value="UPDATE" /> -->
     					<button type="submit" class="btn btn-info btn-sm"><i class="fa fa-refresh"></i></button>
             </form>
             <form action="/cart/<%= item.product_option_id %>" method="POST">
               <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
               <input type="hidden" name="_method" value="DELETE" />
-    					<button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i></button>
+    					<button type="submit" class="btn btn-danger btn-sm" data-confirm="Delete the product?"><i class="fa fa-trash-o"></i></button>
             </form>
           </td>
         </div>

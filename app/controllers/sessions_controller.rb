@@ -2,6 +2,7 @@ class SessionsController < ApplicationController
 
   def log_out
     session.delete(:user_id)
+    session.delete(:order_id)
     redirect_to "/", notice: "You have successfully logged out."
   end
 

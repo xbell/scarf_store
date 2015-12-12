@@ -35,7 +35,11 @@ class ItemController < ApplicationController
   end
 
   def update_cart
-
+    @product_option = ProductOption.find(params[:id])
+    @item = Item.find_by(product_option_id: @product_option.id)
+    @item.quantity = params[:quantity]
+    @item.save
+    redirect_to "/cart", notice: "You cart has been updated."
   end
 
   def delete_item
