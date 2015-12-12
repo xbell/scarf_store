@@ -7,9 +7,6 @@ class SessionsController < ApplicationController
   end
 
   def log_in
-    if @current_user
-      redirect_to "/", notice: "Please log out before logging in again."
-    else
     # find the user by email
     # authenticate that users password matches
       # if it's correct sign them in
@@ -21,8 +18,6 @@ class SessionsController < ApplicationController
       else
         redirect_to "/", flash: {warning: "Wrong username/password."}
       end
-    end
-
   end
 
 end

@@ -22,10 +22,9 @@ Rails.application.routes.draw do
   post "/product/admin/:id", to: "admin#update"
   delete "/product/admin/:id", to: "admin#delete"
 
-  # post "/scarves/:id", to: "product#add_to_cart", as: :add_to_cart
+  get "/checkout", to: "order#checkout"
 
-  # post "/cart", to: "order#show", as: :show
-  # get "/cart", to: "cart#add_to_cart", as: :add_to_cart
+
 
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -20,8 +20,13 @@ class ItemController < ApplicationController
     if @item != nil
       @item.quantity += 1
     else
+      if !session[:order_id]
+        @order = Order.create
+        session[:order_id] = @order.id
+      end
+      @order = Order.find(session[:order_id])
       @item = Item.new
-      @item.order_id = nil
+      @item.order_id = @order.id
       @item.product_option_id = product_option.id
       @item.price = product_option.price_in_cents
       @item.quantity = 1
