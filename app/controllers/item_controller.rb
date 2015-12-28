@@ -23,6 +23,7 @@ class ItemController < ApplicationController
     if @item != nil
       @item.quantity += 1
     else
+      # REVIEW: You should use the `current_order` method from the application controller here
       if !session[:order_id]
         @order = Order.create
         session[:order_id] = @order.id
