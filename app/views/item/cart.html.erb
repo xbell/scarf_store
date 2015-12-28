@@ -21,6 +21,9 @@
 				<td data-th="Product">
 					<div class="row">
 						<div class="col-sm-2 hidden-xs">
+              <!-- REVIEW: Doing any .find methods in the view is not great
+                           and using the built in methods to find associated model is recommended
+                           item.product_option.product should do it -->
               <img src=<%="#{Product.find(ProductOption.find(item.product_option_id).product_id).image_url}"%> alt="..." class="img-responsive"/>
             </div>
 					  <div class="col-sm-10">
