@@ -11,6 +11,7 @@ class SessionsController < ApplicationController
     # authenticate that users password matches
       # if it's correct sign them in
       # else they need to try again
+    # REVIEW: This is indented one too many levels.
       @user = User.find_by(email: params[:email])
       if @user && @user.authenticate(params[:password])
         session[:user_id] = @user.id
