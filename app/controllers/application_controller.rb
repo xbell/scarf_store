@@ -17,6 +17,9 @@ class ApplicationController < ActionController::Base
     else
       o = Order.create
       session[:cart_id] = o.id
+      # REVIEW: This may cause problems because this line doesn't return
+      #         the newly created order, you may want to end this else
+      #         with the order object `o`
     end
   end
 
