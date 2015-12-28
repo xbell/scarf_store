@@ -2,6 +2,9 @@ class AdminController < ApplicationController
 
   def index
     @products = Product.all
+    # REVIEW: It looks like this @product_options variable is never used
+    #         the product_options are typically found by doing product.product_options
+    #         ProductOption.all is not needed.
     @product_options = ProductOption.all
   end
 
@@ -44,6 +47,9 @@ class AdminController < ApplicationController
 
   def update
     @product = Product.find(params[:id])
+    # REVIEW: Everything looks good here, just a note to try to use the nested params
+    #         so that you can do a single line update/create
+    #         @product.update(params.require(:product).permit(:name, :description, :image_url))
     @product.name = params[:name]
     @product.description = params[:description]
     @product.image_url = params[:image_url]
@@ -76,6 +82,9 @@ class AdminController < ApplicationController
     @product = Product.find(params[:id])
     product_name = @product.name
     @product_option.destroy
+    # REVIEW: Instead of doing @product_option.destroy, in the product.rb you can add a line
+    #         to automatically destroy associations with
+    #         has_many :product_options, dependent: :destroy
     @product.destroy
     redirect_to "/products", notice: "#{product_name} has been deleted!"
   end

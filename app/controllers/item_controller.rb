@@ -2,6 +2,9 @@ class ItemController < ApplicationController
 
   def index
     @products = Product.all
+    # REVIEW: It looks like this @product_options variable is never used
+    #         the product_options are typically found by doing product.product_options
+    #         ProductOption.all is not needed.
     @product_options = ProductOption.all
   end
 
@@ -20,6 +23,7 @@ class ItemController < ApplicationController
     if @item != nil
       @item.quantity += 1
     else
+      # REVIEW: You should use the `current_order` method from the application controller here
       if !session[:order_id]
         @order = Order.create
         session[:order_id] = @order.id

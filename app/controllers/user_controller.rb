@@ -5,7 +5,7 @@ class UserController < ApplicationController
     @users.each do |user|
       if user.email == params[:email]
         redirect_to "/signup", notice: "You have already signed up. Please log in."
-        return
+        return # REVIEW: This return is not needed
       end
     end
     @email = params[:email]
