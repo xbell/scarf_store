@@ -47,6 +47,9 @@ class AdminController < ApplicationController
 
   def update
     @product = Product.find(params[:id])
+    # REVIEW: Everything looks good here, just a note to try to use the nested params
+    #         so that you can do a single line update/create
+    #         @product.update(params.require(:product).permit(:name, :description, :image_url))
     @product.name = params[:name]
     @product.description = params[:description]
     @product.image_url = params[:image_url]
