@@ -82,6 +82,9 @@ class AdminController < ApplicationController
     @product = Product.find(params[:id])
     product_name = @product.name
     @product_option.destroy
+    # REVIEW: Instead of doing @product_option.destroy, in the product.rb you can add a line
+    #         to automatically destroy associations with
+    #         has_many :product_options, dependent: :destroy
     @product.destroy
     redirect_to "/products", notice: "#{product_name} has been deleted!"
   end
